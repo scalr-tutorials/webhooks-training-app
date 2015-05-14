@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Scalr Webhooks Log App</title>
+    <link type="image/x-icon" href="https://my.scalr.com/ui2/images/favicon.ico" rel="shortcut icon" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+</head>
+
+<body role="document">
+
+<div class="container" role="main">
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>Scalr Webhooks Log App</h1>
+        <p>This app logs Webhook requests made to it in memory, and presents them below.</p>
+        <p>Refresh the page to see new requests.</p>
+    </div>
+
+    <div class="page-header">
+        <h1>History</h1>
+    </div>
+
+    {% if requests_log %}
+
+        <div class="row">
+            <div class="col-xs-12">
+                <p>Showing the {{ requests_log|length }} most recent request(s).</p>
+            </div>
+        </div>
+
+        {% for request in requests_log|reverse %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>
+                        Received at: {{ request.ts.strftime("%H:%M:%S") }}:
+                    </p>
+                    <pre>{{ request.body|to_pretty_json }}</pre>
+                    </div>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            No requests have been received yet.
+        </div>
+    {% endif %}
+
+</div> <!-- /container -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
