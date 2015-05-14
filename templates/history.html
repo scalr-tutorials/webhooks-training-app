@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <p>
-                        Received at: {{ request.ts.strftime("%H:%M:%S") }}:
+                        Received at: {{ request.ts.strftime("%H:%M:%S") }} UTC:
                     </p>
                     <pre>{{ request.body|to_pretty_json }}</pre>
                     </div>
