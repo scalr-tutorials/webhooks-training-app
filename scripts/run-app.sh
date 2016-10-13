@@ -24,7 +24,7 @@ command_exists() {
 
 if command_exists apt-get; then
   apt-get update
-  apt-get install -y curl
+  apt-get install -y curl docker.io
 elif command_exists yum; then
   yum install -y curl
 fi
@@ -32,7 +32,7 @@ fi
 
 # Install Docker
 
-curl -sSL https://get.docker.com/ | sh
+#curl -sSL https://get.docker.com/ | sh
 
 # Run the app
 
